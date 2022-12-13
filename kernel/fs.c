@@ -496,7 +496,10 @@ itrunc(struct inode *ip)
     	a2 = (uint*)bp2->data;
     	// free every doubly-indirect data blocks
     	for(k = 0; k < NINDIRECT; k++){
-	  if(a2[k]) bfree(ip->dev, a2[k]);
+	  if(a2[k]) {
+	    bfree(ip->dev, a2[k]);
+	    a2[k]=0;
+	    }
 	 }
     	brelse(bp2);
     	bfree(ip->dev, a[j]);
